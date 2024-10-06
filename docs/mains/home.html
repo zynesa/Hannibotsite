@@ -1,4 +1,4 @@
-b<!DOCTYPE html>
+<!DOCTYPE html>
 <html lang="ko">
 <head>
     <meta charset="UTF-8">
@@ -7,7 +7,8 @@ b<!DOCTYPE html>
     <link href="https://fonts.googleapis.com/css2?family=Montserrat:wght@700&family=Open+Sans&display=swap" rel="stylesheet">
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.3/css/all.min.css">
     <script src="https://cdnjs.cloudflare.com/ajax/libs/gsap/3.7.1/gsap.min.js"></script>
-    <link rel="icon" href="assets/images/favicon.ico" type="image/x-icon">
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/gsap/3.7.1/ScrollTrigger.min.js"></script> <!-- ScrollTrigger 플러그인 포함 -->
+    <link rel="icon" href="assets/images/favicon.ico" type="image/x-icon"> <!-- 경로 확인 -->
     <script src="https://cdnjs.cloudflare.com/ajax/libs/ScrollMagic/2.0.7/ScrollMagic.min.js"></script>
     <style>
         body {
@@ -16,7 +17,7 @@ b<!DOCTYPE html>
             padding: 0;
             color: #333;
             background-color: #f0f4f7;
-            overflow-x: hidden; /* 스크롤바 제거 */
+            overflow-x: hidden; /* 수평 스크롤 제거 */
         }
         h1, h2, h3 {
             font-family: 'Montserrat', sans-serif;
@@ -34,10 +35,10 @@ b<!DOCTYPE html>
             z-index: 1000;
         }
         .logo {
-      font-size: 1.8em;
-      font-weight: bold;
-      text-align: center;
-      margin: 0;
+            font-size: 1.8em;
+            font-weight: bold;
+            text-align: center;
+            margin: 0;
         }
         nav {
             display: flex;
@@ -57,7 +58,7 @@ b<!DOCTYPE html>
             text-decoration: none;
             padding: 0.5rem 1rem;
             transition: color 0.3s ease;
-            font-size: 1.1rem; /* 글자 크기를 약간 키워 가독성 향상 */
+            font-size: 1.1rem; /* 글자 크기 약간 증가 */
         }
         nav ul li a:hover {
             color: #FFA500;
@@ -73,7 +74,7 @@ b<!DOCTYPE html>
             justify-content: center;
             align-items: center;
             height: 100vh;
-            margin-top: 0; /* header 높이만큼 패딩 추가 */
+            margin-top: 0; /* 헤더 높이만큼 패딩 추가 */
         }
         .banner::before {
             content: '';
@@ -91,12 +92,17 @@ b<!DOCTYPE html>
         .cta-button {
             background-color: #43B581;
             color: white;
-            padding: 0.5rem 1rem;
+            padding: 1rem; /* 패딩을 늘려서 원형 효과 */
             border: none;
-            border-radius: 5px;
+            border-radius: 50%; /* 원형 버튼 */
             font-size: 1rem;
             cursor: pointer;
             transition: all 0.3s ease;
+            width: 60px; /* 고정 폭 */
+            height: 60px; /* 고정 높이 */
+            display: flex; /* 중앙 정렬을 위한 flex 사용 */
+            align-items: center; /* 수직 중앙 정렬 */
+            justify-content: center; /* 수평 중앙 정렬 */
         }
         .cta-button:hover {
             background-color: #3a9c6f;
@@ -203,22 +209,9 @@ b<!DOCTYPE html>
             nav ul li {
                 margin: 0.25rem; /* 모바일 화면에서 간격 조정 */
             }
-        }
-        .button-link {
-            background-color: #43B581;
-            color: white;
-            text-decoration: none; /* 링크의 기본 밑줄 제거 */
-            padding: 0.5rem 1rem;
-            border-radius: 5px;
-            font-size: 1rem;
-            transition: all 0.3s ease;
-            display: inline-block;
-            cursor: pointer;
-            border: 1px solid transparent; /* 기본 버튼 스타일 추가 */
-        }
-        .button-link:hover {
-            background-color: #3a9c6f;
-            transform: scale(1.05);
+            .feature-card {
+                width: 80%; /* 모바일에서 카드 폭 조정 */
+            }
         }
     </style>
 </head>
@@ -242,18 +235,12 @@ b<!DOCTYPE html>
                 <div class="banner-content">
                     <h1>Hannibot</h1>
                     <p>서버 관리를 더욱 쉽고 효율적으로!</p>
-                    <a href="https://discord.com/oauth2/authorize?client_id=1235089708992696391&permissions=564049867844624&integration_type=0&scope=bot+applications.commands" class="button-link" target="_blank" rel="noopener noreferrer" onclick="trackButtonClick()">봇 초대하기</a>
+                    <a href="https://discord.com/oauth2/authorize?client_id=1235089708992696391&permissions=564049867844624&integration_type=0&scope=bot+applications.commands" class="cta-button" target="_blank" rel="noopener noreferrer">봇 초대하기</a>
                 </div>
             </section>
-            <script>
-                document.querySelector('.button-link').addEventListener('click', function(e) {
-                    e.preventDefault();
-                    window.open(this.href, '_blank');
-                });
-            </script>
             <section id="features" class="features">
                 <div class="feature-card">
-                    <i class="fas fa-cogs fa-dice-d6"></i>
+                    <i class="fas fa-cogs fa-3x"></i>
                     <h3>도박 기능</h3>
                     <p>많은 도박 기능으로 서버를 재밌게 만들어보세요!</p>
                 </div>
@@ -265,131 +252,71 @@ b<!DOCTYPE html>
                 <div class="feature-card">
                     <i class="fas fa-chart-line fa-3x"></i>
                     <h3>정보 기능</h3>
-                    <p>뉴진스의 정보들을 쓰기 쉬운 빗금 명령어로 한번에 알아보세요!</p>
+                    <p>정보를 쉽게 얻을 수 있는 기능이 가득합니다!</p>
                 </div>
             </section>
-
             <section id="reviews" class="reviews">
-                <h2>이용자 리뷰</h2>
+                <h2>사용자 리뷰</h2>
                 <div class="review-slider">
                     <div class="review-slide">
-                        <p>"하니봇 도박 기능 덕분에 서버가 더 나아진거 같아요!" - robo***</p>
-                    </div>  
+                        <p>“Hannibot 덕분에 서버 관리가 한층 수월해졌어요!” - 사용자 A</p>
+                    </div>
+                    <div class="review-slide">
+                        <p>“도박 기능이 정말 재미있어요!” - 사용자 B</p>
+                    </div>
+                    <div class="review-slide">
+                        <p>“이 봇이 없었다면 정말 힘들었을 거예요.” - 사용자 C</p>
+                    </div>
                 </div>
             </section>
         </main>
-        <footer>
-            <div class="footer-content">
-                <ul class="footer-links">
-        <li><a href="form.html">Contact Us</a></li>
-        <li><a href="http://hse-privacypolicy.kro.kr/">개인정보 처리방침</a></li>
-        <li><a href="http://hannibot-tos.kro.kr/">이용약관</a></li>
-                </ul>
-                <div class="social-links">
-                    <a href="https://github.com/Hannibotsupport"><i class="fab fa-github"></i></a>
-                </div>
-            </div>
-            <p>&copy; 2024 HSE All rights reserved.</p>
-        </footer>
     </div>
-        </footer>
-    </div>
-</body>
-</html>
+
+    <footer>
+        <div class="footer-content">
+            <ul class="footer-links">
+                <li><a href="home.html">홈</a></li>
+                <li><a href="features.html">기능</a></li>
+                <li><a href="guide.html">가이드</a></li>
+                <li><a href="patchs.html">패치노트</a></li>
+                <li><a href="form.html">문의하기</a></li>
+            </ul>
+            <ul class="social-links">
+                <li><a href="https://twitter.com" target="_blank"><i class="fab fa-twitter"></i></a></li>
+                <li><a href="https://discord.com" target="_blank"><i class="fab fa-discord"></i></a></li>
+                <li><a href="https://github.com" target="_blank"><i class="fab fa-github"></i></a></li>
+            </ul>
+        </div>
+        <p>© 2024 Hannibot. All Rights Reserved.</p>
+    </footer>
 
     <script>
+        gsap.registerPlugin(ScrollTrigger); // ScrollTrigger 플러그인 등록
 
-        // 배너 이미지 설정
-        const banner = document.querySelector('.banner');
-        banner.style.backgroundImage = "url('assets/images/banner.jpg')";
-
-        // 배너 텍스트 애니메이션
-        gsap.from(".banner-content h1", {opacity: 0, y: 50, duration: 1, delay: 0.5});
-        gsap.from(".banner-content p", {opacity: 0, y: 50, duration: 1, delay: 0.8});
-        gsap.from(".banner-content .cta-button", {opacity: 0, y: 50, duration: 1, delay: 1.1});
-
-        // 기능 카드 애니메이션
-        gsap.from(".feature-card", {
+        gsap.from(".banner-content", {
+            duration: 1,
             opacity: 0,
-            y: 100,
-            duration: 0.8,
-            stagger: 0.2,
+            y: 50,
             scrollTrigger: {
-                trigger: ".features",
-                start: "top 80%"
+                trigger: ".banner",
+                start: "top center",
+                toggleActions: "play none none reverse",
             }
         });
 
-        // 리뷰 슬라이더 애니메이션
-        let currentSlide = 0;
-        const slides = document.querySelectorAll('.review-slide');
-        
-        function showSlide(index) {
-            gsap.to(slides, {x: `-${index * 100}%`, duration: 0.5});
-        }
-
-        function nextSlide() {
-            currentSlide = (currentSlide + 1) % slides.length;
-            showSlide(currentSlide);
-        }
-
-        setInterval(nextSlide, 5000);
-
-        // 스무스 스크롤
-        document.querySelectorAll('a[href^="#"]').forEach(anchor => {
-            anchor.addEventListener('click', function (e) {
-                e.preventDefault();
-                document.querySelector(this.getAttribute('href')).scrollIntoView({
-                    behavior: 'smooth'
-                });
+        const featureCards = document.querySelectorAll('.feature-card');
+        featureCards.forEach(card => {
+            gsap.from(card, {
+                duration: 0.5,
+                opacity: 0,
+                y: 20,
+                scrollTrigger: {
+                    trigger: card,
+                    start: "top 80%",
+                    toggleActions: "play none none reverse",
+                }
             });
         });
-
-         // 스크롤 애니메이션
-        const controller = new ScrollMagic.Controller();
-
-        // 헤더 스크롤 효과
-        window.addEventListener('scroll', () => {
-            if (window.scrollY > 50) {
-                document.querySelector('header').classList.add('scrolled');
-            } else {
-                document.querySelector('header').classList.remove('scrolled');
-            }
-        });
-
-        // 카드 호버 효과
-        document.querySelectorAll('.feature-card').forEach(card => {
-            card.addEventListener('mouseenter', () => {
-                gsap.to(card, {scale: 1.05, duration: 0.3});
-            });
-            card.addEventListener('mouseleave', () => {
-                gsap.to(card, {scale: 1, duration: 0.3});
-            });
-        });
-         // 섹션별 페이드인 효과
-        const sections = document.querySelectorAll('section');
-        sections.forEach(section => {
-            new ScrollMagic.Scene({
-                triggerElement: section,
-                triggerHook: 0.8,
-                reverse: false
-            })
-            .setTween(gsap.from(section, {opacity: 0, y: 50, duration: 0.8}))
-            .addTo(controller);
-        });
-
-            // 특징 카드 애니메이션
-        gsap.from('.feature-card', {
-        opacity: 0,
-        y: 50,
-        stagger: 0.2,
-        duration: 0.8,
-        scrollTrigger: {
-            trigger: '.features',
-            start: 'top 80%'
-            }
-        });
-
     </script>
 </body>
 </html>
