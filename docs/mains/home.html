@@ -3,206 +3,138 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Hannibot - 스마트한 디스코드 서버 관리</title>
-    <link href="https://fonts.googleapis.com/css2?family=Noto+Sans+KR:wght@300;400;700&display=swap" rel="stylesheet">
+    <title>Hannibot - 서버 관리를 더욱 스마트하게</title>
     <style>
-        :root {
-            --primary-color: #4a90e2;
-            --secondary-color: #f0f4f8;
-            --text-color: #333333;
-            --background-color: #ffffff;
-        }
-        body {
-            font-family: 'Noto Sans KR', sans-serif;
+        * {
             margin: 0;
             padding: 0;
-            background-color: var(--background-color);
-            color: var(--text-color);
-            line-height: 1.6;
+            box-sizing: border-box;
+            font-family: Arial, sans-serif;
         }
-        .container {
-            max-width: 1200px;
-            margin: 0 auto;
-            padding: 0 20px;
+        body {
+            background-color: #f0f4f8;
         }
         header {
-            background-color: var(--background-color);
-            box-shadow: 0 2px 10px rgba(0,0,0,0.1);
-            position: sticky;
-            top: 0;
-            z-index: 1000;
-        }
-        nav {
+            background-color: white;
+            padding: 1rem;
             display: flex;
             justify-content: space-between;
             align-items: center;
-            padding: 1rem 0;
+            box-shadow: 0 2px 4px rgba(0,0,0,0.1);
         }
         .logo {
-            height: 40px;
-            transition: transform 0.3s ease;
+            font-size: 1.5rem;
+            font-weight: bold;
         }
-        .logo:hover {
-            transform: scale(1.05);
-        }
-        .nav-links a {
-            color: var(--text-color);
+        nav a {
+            margin-left: 1rem;
             text-decoration: none;
-            margin-left: 20px;
-            font-weight: 500;
-            transition: color 0.3s ease;
-            position: relative;
-        }
-        .nav-links a::after {
-            content: '';
-            position: absolute;
-            width: 0;
-            height: 2px;
-            bottom: -5px;
-            left: 0;
-            background-color: var(--primary-color);
-            transition: width 0.3s ease;
-        }
-        .nav-links a:hover::after {
-            width: 100%;
+            color: #333;
         }
         .hero {
-            background-color: var(--secondary-color);
-            padding: 6rem 0;
             text-align: center;
+            padding: 4rem 1rem;
         }
-        .hero h1 {
-            font-size: 3rem;
+        h1 {
+            font-size: 2.5rem;
             margin-bottom: 1rem;
-            color: var(--text-color);
+            color: #333;
         }
-        .hero p {
-            font-size: 1.2rem;
+        p {
+            font-size: 1.1rem;
+            color: #666;
             margin-bottom: 2rem;
-            color: var(--text-color);
-            max-width: 600px;
-            margin-left: auto;
-            margin-right: auto;
         }
         .cta-button {
-            background-color: var(--primary-color);
-            color: var(--background-color);
-            padding: 12px 24px;
-            border-radius: 30px;
+            background-color: #4a90e2;
+            color: white;
+            padding: 0.75rem 1.5rem;
+            border-radius: 5px;
             text-decoration: none;
             font-weight: bold;
-            transition: all 0.3s ease;
-            display: inline-block;
+            transition: background-color 0.3s;
         }
         .cta-button:hover {
             background-color: #3a7bc8;
-            transform: translateY(-2px);
-            box-shadow: 0 4px 10px rgba(74, 144, 226, 0.3);
         }
         .features {
-            padding: 6rem 0;
-        }
-        .feature-grid {
-            display: grid;
-            grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
-            gap: 3rem;
+            display: flex;
+            justify-content: space-around;
+            padding: 4rem 1rem;
+            background-color: white;
         }
         .feature {
             text-align: center;
-            padding: 2rem;
-            background-color: var(--background-color);
-            border-radius: 8px;
-            transition: all 0.3s ease;
-            box-shadow: 0 4px 6px rgba(0,0,0,0.1);
-        }
-        .feature:hover {
-            transform: translateY(-5px);
-            box-shadow: 0 8px 15px rgba(0,0,0,0.1);
+            max-width: 300px;
         }
         .feature img {
-            width: 80px;
-            height: 80px;
-            margin-bottom: 1.5rem;
-        }
-        .feature h3 {
-            font-size: 1.5rem;
+            width: 100px;
+            height: 100px;
             margin-bottom: 1rem;
         }
-        footer {
-            background-color: var(--secondary-color);
-            color: var(--text-color);
-            text-align: center;
-            padding: 2rem 0;
+        .feature h3 {
+            margin-bottom: 0.5rem;
+            color: #333;
         }
-        @media (max-width: 768px) {
-            .nav-links {
-                display: none;
-            }
-            .hero h1 {
-                font-size: 2.5rem;
-            }
-            .hero p {
-                font-size: 1rem;
-            }
-            .feature-grid {
-                grid-template-columns: 1fr;
-            }
+        .feature p {
+            font-size: 0.9rem;
+        }
+        @keyframes fadeIn {
+            from { opacity: 0; }
+            to { opacity: 1; }
+        }
+        .fade-in {
+            animation: fadeIn 1s ease-in;
         }
     </style>
 </head>
 <body>
     <header>
-        <nav class="container">
-            <a href="/">
-                <img src="assets/images/HSElogo.png" alt="Hannibot Logo" class="logo">
-            </a>
-            <div class="nav-links">
-                <a href="#home">홈</a>
-                <a href="#features">기능</a>
-                <a href="#guide">가이드</a>
-                <a href="#patchnotes">패치노트</a>
-                <a href="#contact">문의하기</a>
-            </div>
+        <div class="logo">Hannibot</div>
+        <nav>
+            <a href="#home">홈</a>
+            <a href="#features">기능</a>
+            <a href="#guide">가이드</a>
+            <a href="#pricing">패치노트</a>
+            <a href="#contact">문의하기</a>
         </nav>
     </header>
 
     <main>
-        <section class="hero" id="home">
-            <div class="container">
-                <h1>서버 관리를 더욱 스마트하게</h1>
-                <p>Hannibot과 함께 디스코드 서버를 효율적으로 관리하세요. 자동화된 기능으로 시간을 절약하고 커뮤니티를 성장시키세요.</p>
-                <a href="#" class="cta-button">지금 시작하기</a>
-            </div>
+        <section class="hero fade-in">
+            <h1>서버 관리를 더욱 스마트하게</h1>
+            <p>Hannibot과 함께 디스코드 서버를 효율적으로 관리하세요. 자동화된 기능으로 시간을 절약하고 커뮤니티를 성장시키세요.</p>
+            <a href="#" class="cta-button">지금 시작하기</a>
         </section>
 
-        <section class="features" id="features">
-            <div class="container">
-                <h2 style="text-align: center; margin-bottom: 3rem; font-size: 2.5rem;">Hannibot의 주요 기능</h2>
-                <div class="feature-grid">
-                    <div class="feature">
-                        <img src="/placeholder.svg?height=80&width=80" alt="자동화 아이콘">
-                        <h3>스마트 자동화</h3>
-                        <p>반복적인 작업을 자동화하여 서버 관리 시간을 절약하세요. 맞춤형 명령어와 이벤트 트리거로 서버를 효율적으로 운영하세요.</p>
-                    </div>
-                    <div class="feature">
-                        <img src="/placeholder.svg?height=80&width=80" alt="멤버 관리 아이콘">
-                        <h3>멤버 관리</h3>
-                        <p>효율적인 멤버 관리 기능으로 커뮤니티를 건강하게 유지하세요. 역할 부여, 환영 메시지, 활동 모니터링 등 다양한 기능을 제공합니다.</p>
-                    </div>
-                    <div class="feature">
-                        <img src="/placeholder.svg?height=80&width=80" alt="실시간 모니터링 아이콘">
-                        <h3>실시간 모니터링</h3>
-                        <p>서버 활동을 실시간으로 모니터링하고 빠르게 대응하세요. 채팅 필터링, 스팸 방지, 로그 기록 등으로 안전한 환경을 유지하세요.</p>
-                    </div>
-                </div>
+        <section class="features">
+            <div class="feature fade-in">
+                <img src="https://via.placeholder.com/100" alt="스마트 자동화">
+                <h3>스마트 자동화</h3>
+                <p>반복적인 작업을 자동화하여 서버 관리 시간을 절약하세요. 맞춤형 명령어와 이벤트 트리거로 서버를 효율적으로 운영하세요.</p>
+            </div>
+            <div class="feature fade-in">
+                <img src="https://via.placeholder.com/100" alt="멤버 관리">
+                <h3>멤버 관리</h3>
+                <p>효율적인 멤버 관리 기능으로 커뮤니티를 건강하게 유지하세요. 역할 부여, 환영 메시지, 활동 모니터링 등 다양한 기능을 제공합니다.</p>
+            </div>
+            <div class="feature fade-in">
+                <img src="https://via.placeholder.com/100" alt="실시간 모니터링">
+                <h3>실시간 모니터링</h3>
+                <p>서버 활동을 실시간으로 모니터링하고 빠르게 대응하세요. 채팅 필터링, 스팸 방지, 로그 기록 등으로 안전한 환경을 유지하세요.</p>
             </div>
         </section>
     </main>
 
-    <footer>
-        <div class="container">
-            <p>&copy; 2024 HSE All rights reserved.</p>
-        </div>
-    </footer>
+    <script>
+        document.addEventListener('DOMContentLoaded', (event) => {
+            const fadeElements = document.querySelectorAll('.fade-in');
+            fadeElements.forEach((el, i) => {
+                setTimeout(() => {
+                    el.style.opacity = '1';
+                }, i * 200);
+            });
+        });
+    </script>
 </body>
 </html>
