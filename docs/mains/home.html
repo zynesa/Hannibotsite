@@ -3,88 +3,210 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Hannibot - 서버 관리를 더욱 스마트하게</title>
+    <title>Hannibot</title>
+    <link href="https://fonts.googleapis.com/css2?family=Montserrat:wght@700&family=Open+Sans&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.3/css/all.min.css">
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/gsap/3.7.1/gsap.min.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/gsap/3.7.1/ScrollTrigger.min.js"></script> <!-- ScrollTrigger 플러그인 포함 -->
+    <link rel="icon" href="assets/images/favicon.ico" type="image/x-icon"> <!-- 경로 확인 -->
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/ScrollMagic/2.0.7/ScrollMagic.min.js"></script>
     <style>
-        * {
+        body {
+            font-family: 'Arial', sans-serif;
             margin: 0;
             padding: 0;
-            box-sizing: border-box;
-            font-family: Arial, sans-serif;
+            color: #333;
+            background-color: #f0f4f7;
+            overflow-x: hidden; /* 수평 스크롤 제거 */
         }
-        body {
-            background-color: #f0f4f8;
+        h1, h2, h3 {
+            font-family: 'Montserrat', sans-serif;
         }
         header {
-            background-color: white;
+            background-color: #7289DA;
+            color: white;
             padding: 1rem;
             display: flex;
             justify-content: space-between;
             align-items: center;
-            box-shadow: 0 2px 4px rgba(0,0,0,0.1);
+            position: fixed;
+            width: 100%;
+            top: 0;
+            z-index: 1000;
         }
         .logo {
-            font-size: 1.5rem;
+            font-size: 1.8em;
             font-weight: bold;
-        }
-        nav a {
-            margin-left: 1rem;
-            text-decoration: none;
-            color: #333;
-        }
-        .hero {
             text-align: center;
-            padding: 4rem 1rem;
+            margin: 0;
         }
-        h1 {
-            font-size: 2.5rem;
-            margin-bottom: 1rem;
-            color: #333;
+        nav {
+            display: flex;
+            justify-content: center;
         }
-        p {
-            font-size: 1.1rem;
-            color: #666;
-            margin-bottom: 2rem;
+        nav ul {
+            list-style: none;
+            display: flex;
+            padding: 0;
+            margin: 0;
         }
-        .cta-button {
-            background-color: #4a90e2;
+        nav ul li {
+            margin: 0 0.25rem !important;
+        }
+        nav ul li a {
             color: white;
-            padding: 0.75rem 1.5rem;
-            border-radius: 5px;
             text-decoration: none;
-            font-weight: bold;
-            transition: background-color 0.3s;
+            padding: 0.5rem 1rem;
+            transition: color 0.3s ease;
+            font-size: 1.1rem; /* 글자 크기 약간 증가 */
         }
-        .cta-button:hover {
-            background-color: #3a7bc8;
+        nav ul li a:hover {
+            color: #FFA500;
         }
+        .banner {
+            background: url('https://github.com/user-attachments/assets/d0f19856-9a01-4ca1-8120-6eb8b3a0317d') no-repeat center center/cover;
+            color: white;
+            text-align: center;
+            padding: 8rem 2rem 4rem;
+            position: relative;
+            overflow: hidden;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            height: 100vh;
+            margin-top: 0; /* 헤더 높이만큼 패딩 추가 */
+        }
+        .banner::before {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: 0;
+            right: 0;
+            bottom: 0;
+            background: rgba(0, 0, 0, 0.5);
+        }
+        .banner-content {
+            position: relative;
+            z-index: 1;
+        }
+    .cta-button {
+        background-color: #43B581;
+        color: white;
+        padding: 0.5rem 1rem;
+        border: none;
+        border-radius: 15px; /* 납작한 동그라미 */
+        font-size: 1rem;
+        cursor: pointer;
+        transition: all 0.3s ease;
+    }
+    .cta-button:hover {
+        background-color: #3a9c6f;
+        transform: scale(1.05);
+    }
         .features {
             display: flex;
             justify-content: space-around;
-            padding: 4rem 1rem;
-            background-color: white;
+            padding: 4rem 2rem;
+            flex-wrap: wrap;
         }
-        .feature {
+        .feature-card {
+            background-color: #f9f9f9;
+            border-radius: 10px;
+            padding: 1rem;
+            width: 30%;
             text-align: center;
-            max-width: 300px;
+            margin-bottom: 2rem;
+            transition: all 0.3s ease;
+            cursor: pointer;
         }
-        .feature img {
-            width: 100px;
-            height: 100px;
-            margin-bottom: 1rem;
+        .feature-card:hover {
+            transform: translateY(-10px);
+            box-shadow: 0 10px 20px rgba(0,0,0,0.1);
         }
-        .feature h3 {
-            margin-bottom: 0.5rem;
-            color: #333;
+        .reviews {
+            background-color: #E3E5E8;
+            padding: 4rem 2rem;
+            text-align: center;
         }
-        .feature p {
-            font-size: 0.9rem;
+        .review-slider {
+            overflow: hidden;
+            white-space: nowrap;
+            max-width: 100%;
+            position: relative;
         }
-        @keyframes fadeIn {
-            from { opacity: 0; }
-            to { opacity: 1; }
+        .review-slide {
+            display: inline-block;
+            width: 100%;
+            padding: 0 2rem;
+            box-sizing: border-box;
         }
-        .fade-in {
-            animation: fadeIn 1s ease-in;
+        footer {
+            background-color: #2C2F33;
+            color: white;
+            text-align: center;
+            padding: 2rem;
+            position: relative;
+        }
+        .footer-content {
+            display: flex;
+            justify-content: space-between;
+            flex-wrap: wrap;
+            align-items: center;
+        }
+        .footer-links, .social-links {
+            margin: 0;
+            padding: 0;
+            list-style: none;
+            display: flex;
+            justify-content: center;
+            flex-wrap: wrap;
+        }
+        .footer-links a {
+            color: white;
+            text-decoration: none;
+            margin: 0 0.5rem;
+            transition: color 0.3s ease;
+        }
+        .footer-links a:hover {
+            color: #FFA500;
+        }
+        .social-links a {
+            color: white;
+            font-size: 1.5rem;
+            margin: 0 0.5rem;
+            transition: color 0.3s ease;
+        }
+        .social-links a:hover {
+            color: #FFA500;
+        }
+        .content {
+            overflow-x: hidden;
+            display: flex;
+            flex-direction: column;
+            min-height: 100vh;
+        }
+        main {
+            flex: 1;
+        }
+
+        /* 반응형 디자인을 위한 미디어 쿼리 수정 */
+        @media (max-width: 768px) {
+            header {
+                flex-direction: column;
+                align-items: center;
+            }
+            nav ul {
+                flex-direction: row;
+                flex-wrap: wrap;
+                justify-content: center;
+                margin-top: 1rem;
+            }
+            nav ul li {
+                margin: 0.25rem; /* 모바일 화면에서 간격 조정 */
+            }
+            .feature-card {
+                width: 80%; /* 모바일에서 카드 폭 조정 */
+            }
         }
     </style>
 </head>
@@ -92,47 +214,94 @@
     <header>
         <div class="logo">Hannibot</div>
         <nav>
-            <a href="#home">홈</a>
-            <a href="#features">기능</a>
-            <a href="#guide">가이드</a>
-            <a href="#pricing">패치노트</a>
-            <a href="#contact">문의하기</a>
+            <ul>
+                <li><a href="home.html">홈</a></li>
+                <li><a href="features.html">기능</a></li>
+                <li><a href="guide.html">가이드</a></li>
+                <li><a href="patchs.html">패치노트</a></li>
+                <li><a href="form.html">문의하기</a></li>
+            </ul>
         </nav>
     </header>
 
-    <main>
-        <section class="hero fade-in">
-            <h1>서버 관리를 더욱 스마트하게</h1>
-            <p>Hannibot과 함께 디스코드 서버를 효율적으로 관리하세요. 자동화된 기능으로 시간을 절약하고 커뮤니티를 성장시키세요.</p>
-            <a href="#" class="cta-button">지금 시작하기</a>
-        </section>
+    <div class="content">
+        <main>
+            <section id="home" class="banner">
+                <div class="banner-content">
+                    <h1>Hannibot</h1>
+                    <p>서버 관리를 더욱 쉽고 효율적으로!</p>
+                    <a href="https://discord.com/oauth2/authorize?client_id=1235089708992696391&permissions=564049867844624&integration_type=0&scope=bot+applications.commands" class="cta-button" target="_blank" rel="noopener noreferrer">봇 초대하기</a>
+                </div>
+            </section>
+            <section id="features" class="features">
+                <div class="feature-card">
+                    <i class="fas fa-cogs fa-3x"></i>
+                    <h3>도박 기능</h3>
+                    <p>많은 도박 기능으로 서버를 재밌게 만들어보세요!</p>
+                </div>
+                <div class="feature-card">
+                    <i class="fas fa-shield-alt fa-3x"></i>
+                    <h3>서버 관리</h3>
+                    <p>서버 관리 기능을 이용해 서버를 효율적으로 관리해보세요!</p>
+                </div>
+                <div class="feature-card">
+                    <i class="fas fa-chart-line fa-3x"></i>
+                    <h3>정보 기능</h3>
+                    <p>정보를 쉽게 얻을 수 있는 기능이 가득합니다!</p>
+                </div>
+            </section>
+            <section id="reviews" class="reviews">
+                <h2>사용자 리뷰</h2>
+                <div class="review-slider">
+                    <div class="review-slide">
+                        <p>“서버 관리가 한층 수월해졌어요!” - Ur_t**e</p>
+                    </div>
+                </div>
+            </section>
+        </main>
+    </div>
 
-        <section class="features">
-            <div class="feature fade-in">
-                <img src="https://via.placeholder.com/100" alt="스마트 자동화">
-                <h3>스마트 자동화</h3>
-                <p>반복적인 작업을 자동화하여 서버 관리 시간을 절약하세요. 맞춤형 명령어와 이벤트 트리거로 서버를 효율적으로 운영하세요.</p>
-            </div>
-            <div class="feature fade-in">
-                <img src="https://via.placeholder.com/100" alt="멤버 관리">
-                <h3>멤버 관리</h3>
-                <p>효율적인 멤버 관리 기능으로 커뮤니티를 건강하게 유지하세요. 역할 부여, 환영 메시지, 활동 모니터링 등 다양한 기능을 제공합니다.</p>
-            </div>
-            <div class="feature fade-in">
-                <img src="https://via.placeholder.com/100" alt="실시간 모니터링">
-                <h3>실시간 모니터링</h3>
-                <p>서버 활동을 실시간으로 모니터링하고 빠르게 대응하세요. 채팅 필터링, 스팸 방지, 로그 기록 등으로 안전한 환경을 유지하세요.</p>
-            </div>
-        </section>
-    </main>
+    <footer>
+        <div class="footer-content">
+            <ul class="footer-links">
+                <li><a href="home.html">홈</a></li>
+                <li><a href="features.html">기능</a></li>
+                <li><a href="guide.html">가이드</a></li>
+                <li><a href="patchs.html">패치노트</a></li>
+                <li><a href="form.html">문의하기</a></li>
+            </ul>
+            <ul class="social-links">
+                <li><a href="https://discord.com" target="_blank"><i class="fab fa-discord"></i></a></li>
+            </ul>
+        </div>
+        <p>© 2024 Hannibot. All Rights Reserved.</p>
+    </footer>
 
     <script>
-        document.addEventListener('DOMContentLoaded', (event) => {
-            const fadeElements = document.querySelectorAll('.fade-in');
-            fadeElements.forEach((el, i) => {
-                setTimeout(() => {
-                    el.style.opacity = '1';
-                }, i * 200);
+        gsap.registerPlugin(ScrollTrigger); // ScrollTrigger 플러그인 등록
+
+        gsap.from(".banner-content", {
+            duration: 1,
+            opacity: 0,
+            y: 50,
+            scrollTrigger: {
+                trigger: ".banner",
+                start: "top center",
+                toggleActions: "play none none reverse",
+            }
+        });
+
+        const featureCards = document.querySelectorAll('.feature-card');
+        featureCards.forEach(card => {
+            gsap.from(card, {
+                duration: 0.5,
+                opacity: 0,
+                y: 20,
+                scrollTrigger: {
+                    trigger: card,
+                    start: "top 80%",
+                    toggleActions: "play none none reverse",
+                }
             });
         });
     </script>
