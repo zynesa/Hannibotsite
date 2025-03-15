@@ -1,0 +1,949 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Error Occurred - Hannibot</title>
+    <link rel="icon" href="assets/favicon.ico" type="image/x-icon">
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    <style>
+        :root {
+            --primary: #3182F6;
+            --primary-dark: #1b64da;
+            --primary-light: #e6f0ff;
+            --primary-gradient: linear-gradient(135deg, #3182F6, #1a56c5);
+            --secondary: #FF6B6B;
+            --secondary-dark: #FF5252;
+            --text: #191F28;
+            --background: #FFFFFF;
+            --gray-50: #F9FAFB;
+            --gray-100: #F2F4F6;
+            --gray-200: #E5E8EB;
+            --gray-300: #D1D6DB;
+            --gray-400: #B0B8C1;
+            --gray-500: #8B95A1;
+            --gray-600: #6B7684;
+            --gray-700: #4E5968;
+            --gray-800: #333D4B;
+            --gray-900: #191F28;
+            --shadow: 0 4px 6px -1px rgba(0, 0, 0, 0.1), 0 2px 4px -1px rgba(0, 0, 0, 0.06);
+            --shadow-lg: 0 10px 15px -3px rgba(0, 0, 0, 0.1), 0 4px 6px -2px rgba(0, 0, 0, 0.05);
+            --shadow-xl: 0 20px 25px -5px rgba(0, 0, 0, 0.1), 0 10px 10px -5px rgba(0, 0, 0, 0.04);
+        }
+        .dark-theme {
+            --text: #E5E8EB;
+            --background: #191F28;
+            --gray-50: #333D4B;
+            --gray-100: #4E5968;
+            --gray-200: #6B7684;
+            --gray-300: #8B95A1;
+            --gray-400: #B0B8C1;
+            --gray-500: #D1D6DB;
+            --gray-600: #E5E8EB;
+            --gray-700: #F2F4F6;
+            --gray-800: #F9FAFB;
+            --gray-900: #FFFFFF;
+            --shadow: 0 4px 6px -1px rgba(255, 255, 255, 0.1), 0 2px 4px -1px rgba(255, 255, 255, 0.06);
+            --shadow-lg: 0 10px 15px -3px rgba(255, 255, 255, 0.1), 0 4px 6px -2px rgba(255, 255, 255, 0.05);
+            --shadow-xl: 0 20px 25px -5px rgba(255, 255, 255, 0.1), 0 10px 10px -5px rgba(255, 255, 255, 0.04);
+            --primary-light: #1E242D;
+        }
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+        body {
+            font-family: 'Inter', -apple-system, BlinkMacSystemFont, 'Segoe UI', 'Roboto', 'Oxygen', 'Ubuntu', 'Cantarell', 'Fira Sans', 'Droid Sans', 'Helvetica Neue', sans-serif;
+            color: var(--text);
+            background-color: var(--background);
+            line-height: 1.5;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            min-height: 100vh;
+            transition: background-color 0.3s ease, color 0.3s ease;
+            overflow-x: hidden;
+            position: relative;
+        }
+        .container {
+            text-align: center;
+            padding: 2rem;
+            max-width: 800px;
+            position: relative;
+            z-index: 10;
+        }
+        .logo {
+            font-size: 2.5rem;
+            font-weight: 700;
+            color: var(--primary);
+            margin-bottom: 2rem;
+            animation: fadeInDown 0.8s ease-out;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            gap: 0.5rem;
+        }
+        .logo-icon {
+            width: 50px;
+            height: 50px;
+            border-radius: 50%;
+            object-fit: cover;
+            box-shadow: var(--shadow);
+        }
+        h1 {
+            font-size: 4rem;
+            margin-bottom: 1.5rem;
+            animation: fadeInDown 0.8s ease-out 0.2s both;
+            background: var(--primary-gradient);
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+            background-clip: text;
+            text-fill-color: transparent;
+            font-weight: 800;
+            letter-spacing: -1px;
+            text-shadow: 0 5px 15px rgba(49, 130, 246, 0.3);
+        }
+        p {
+            font-size: 1.25rem;
+            color: var(--gray-600);
+            margin-bottom: 2.5rem;
+            animation: fadeInDown 0.8s ease-out 0.4s both;
+            max-width: 600px;
+            margin-left: auto;
+            margin-right: auto;
+            line-height: 1.8;
+        }
+        .btn-container {
+            display: flex;
+            gap: 1.5rem;
+            justify-content: center;
+            animation: fadeInUp 0.8s ease-out 0.6s both;
+            margin-top: 3rem;
+        }
+        .btn {
+            display: inline-flex;
+            align-items: center;
+            justify-content: center;
+            padding: 1rem 2rem;
+            border-radius: 1rem;
+            font-weight: 600;
+            transition: all 0.3s ease;
+            min-width: 180px;
+            position: relative;
+            overflow: hidden;
+            z-index: 1;
+            font-size: 1.1rem;
+            text-decoration: none;
+        }
+        .btn::before {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background: var(--primary-gradient);
+            z-index: -1;
+            transition: all 0.5s ease;
+        }
+        .btn-primary {
+            color: white;
+        }
+        .btn-primary:hover::before {
+            transform: scale(1.1);
+        }
+        .btn-primary:hover {
+            transform: translateY(-5px);
+            box-shadow: var(--shadow-xl);
+        }
+        .btn-outline {
+            color: var(--primary);
+            border: 2px solid var(--primary);
+            background: transparent;
+        }
+        .btn-outline::before {
+            opacity: 0;
+        }
+        .btn-outline:hover {
+            color: white;
+            transform: translateY(-5px);
+            box-shadow: var(--shadow-lg);
+        }
+        .btn-outline:hover::before {
+            opacity: 1;
+        }
+        .btn i {
+            margin-right: 0.75rem;
+            font-size: 1.2rem;
+        }
+        .error-code {
+            font-size: 25rem;
+            font-weight: 900;
+            position: absolute;
+            top: 50%;
+            left: 50%;
+            transform: translate(-50%, -50%);
+            z-index: -1;
+            opacity: 0.05;
+            animation: pulse 6s ease-in-out infinite;
+            color: var(--primary);
+            line-height: 1;
+        }
+        .theme-toggle, .lang-toggle {
+            position: fixed;
+            background: var(--background);
+            border: none;
+            color: var(--text);
+            font-size: 1.5rem;
+            cursor: pointer;
+            transition: all 0.3s ease;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            width: 60px;
+            height: 60px;
+            border-radius: 50%;
+            box-shadow: var(--shadow-lg);
+            z-index: 100;
+        }
+        .theme-toggle:hover, .lang-toggle:hover {
+            color: var(--primary);
+            transform: translateY(-5px) rotate(15deg);
+            box-shadow: var(--shadow-xl);
+        }
+        .theme-toggle {
+            top: 2rem;
+            right: 2rem;
+        }
+        .lang-toggle {
+            top: 2rem;
+            left: 2rem;
+        }
+        .scene {
+            position: absolute;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            z-index: -2;
+            overflow: hidden;
+        }
+        .astronaut {
+            position: absolute;
+            width: 200px;
+            height: 200px;
+            background-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 512 512'%3E%3Cpath fill='%233182F6' d='M256 0C114.6 0 0 114.6 0 256s114.6 256 256 256s256-114.6 256-256S397.4 0 256 0zM256 464c-114.7 0-208-93.31-208-208S141.3 48 256 48s208 93.31 208 208S370.7 464 256 464zM296 336h-16V248C280 234.8 269.3 224 256 224H224C210.8 224 200 234.8 200 248S210.8 272 224 272h8v64h-16C202.8 336 192 346.8 192 360S202.8 384 216 384h80c13.25 0 24-10.75 24-24S309.3 336 296 336zM256 192c17.67 0 32-14.33 32-32c0-17.67-14.33-32-32-32S224 142.3 224 160C224 177.7 238.3 192 256 192z'/%3E%3C/svg%3E");
+            background-size: contain;
+            background-repeat: no-repeat;
+            animation: float-astronaut 15s ease-in-out infinite;
+            opacity: 0.1;
+        }
+        .star {
+            position: absolute;
+            background-color: var(--primary);
+            border-radius: 50%;
+            animation: twinkle 3s infinite ease-in-out;
+        }
+        .meteor {
+            position: absolute;
+            width: 300px;
+            height: 1px;
+            background: linear-gradient(90deg, rgba(49, 130, 246, 0), rgba(49, 130, 246, 1));
+            transform: rotate(-45deg);
+            animation: meteor 6s linear infinite;
+            opacity: 0;
+        }
+        .planet {
+            position: absolute;
+            width: 100px;
+            height: 100px;
+            border-radius: 50%;
+            background: radial-gradient(circle at 30% 30%, var(--primary-light), var(--primary));
+            box-shadow: inset 0 0 20px rgba(255, 255, 255, 0.5), 0 0 20px rgba(49, 130, 246, 0.3);
+            animation: rotate 30s linear infinite;
+        }
+        .planet::after {
+            content: '';
+            position: absolute;
+            top: 10%;
+            left: 20%;
+            width: 20%;
+            height: 20%;
+            border-radius: 50%;
+            background-color: rgba(255, 255, 255, 0.3);
+        }
+        .error-illustration {
+            position: relative;
+            width: 300px;
+            height: 300px;
+            margin: 0 auto 3rem;
+            animation: float 6s ease-in-out infinite;
+        }
+        .robot {
+            position: absolute;
+            top: 50%;
+            left: 50%;
+            transform: translate(-50%, -50%);
+            width: 200px;
+            height: 200px;
+        }
+        .robot-body {
+            position: relative;
+            width: 100%;
+            height: 100%;
+        }
+        .robot-head {
+            position: absolute;
+            top: 0;
+            left: 50%;
+            transform: translateX(-50%);
+            width: 100px;
+            height: 80px;
+            background-color: var(--primary);
+            border-radius: 20px;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            flex-direction: column;
+            animation: head-bob 3s ease-in-out infinite;
+        }
+        .robot-eye {
+            width: 15px;
+            height: 15px;
+            background-color: white;
+            border-radius: 50%;
+            margin: 5px;
+            position: relative;
+            animation: blink 4s infinite;
+        }
+        .robot-eye::after {
+            content: '';
+            position: absolute;
+            top: 2px;
+            left: 2px;
+            width: 5px;
+            height: 5px;
+            background-color: var(--primary);
+            border-radius: 50%;
+            animation: look-around 5s infinite;
+        }
+        .robot-eyes {
+            display: flex;
+            margin-top: 20px;
+        }
+        .robot-antenna {
+            position: absolute;
+            top: -20px;
+            left: 50%;
+            transform: translateX(-50%);
+            width: 10px;
+            height: 20px;
+            background-color: var(--primary-dark);
+            border-radius: 5px;
+        }
+        .robot-antenna::after {
+            content: '';
+            position: absolute;
+            top: -10px;
+            left: 50%;
+            transform: translateX(-50%);
+            width: 10px;
+            height: 10px;
+            background-color: var(--secondary);
+            border-radius: 50%;
+            animation: pulse 2s infinite;
+        }
+        .robot-body-main {
+            position: absolute;
+            top: 90px;
+            left: 50%;
+            transform: translateX(-50%);
+            width: 120px;
+            height: 100px;
+            background-color: var(--primary-dark);
+            border-radius: 20px;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+        }
+        .robot-panel {
+            width: 80px;
+            height: 60px;
+            background-color: var(--primary-light);
+            border-radius: 10px;
+            display: grid;
+            grid-template-columns: repeat(3, 1fr);
+            grid-template-rows: repeat(2, 1fr);
+            gap: 5px;
+            padding: 5px;
+        }
+        .robot-button {
+            background-color: var(--primary);
+            border-radius: 50%;
+            animation: glow 3s infinite alternate;
+        }
+        .robot-arm {
+            position: absolute;
+            width: 20px;
+            height: 60px;
+            background-color: var(--primary);
+            border-radius: 10px;
+        }
+        .robot-arm-left {
+            top: 100px;
+            left: 20px;
+            transform-origin: top center;
+            animation: wave-left 5s ease-in-out infinite;
+        }
+        .robot-arm-right {
+            top: 100px;
+            right: 20px;
+            transform-origin: top center;
+            animation: wave-right 7s ease-in-out infinite;
+        }
+        .robot-leg {
+            position: absolute;
+            width: 25px;
+            height: 70px;
+            background-color: var(--primary-dark);
+            border-radius: 10px;
+            bottom: -60px;
+        }
+        .robot-leg-left {
+            left: 40px;
+            animation: leg-swing-left 3s ease-in-out infinite;
+        }
+        .robot-leg-right {
+            right: 40px;
+            animation: leg-swing-right 3s ease-in-out infinite;
+        }
+        .glitch-effect {
+            position: relative;
+            display: inline-block;
+        }
+        .glitch-effect::before,
+        .glitch-effect::after {
+            content: attr(data-text);
+            position: absolute;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background: var(--background);
+            clip-path: polygon(0 0, 100% 0, 100% 45%, 0 45%);
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+            background-clip: text;
+            text-fill-color: transparent;
+        }
+        .glitch-effect::before {
+            left: -2px;
+            text-shadow: -2px 0 var(--secondary);
+            animation: glitch-anim-1 2s infinite linear alternate-reverse;
+        }
+        .glitch-effect::after {
+            left: 2px;
+            text-shadow: 2px 0 var(--primary);
+            animation: glitch-anim-2 3s infinite linear alternate-reverse;
+        }
+        .search-form {
+            margin-top: 2rem;
+            display: flex;
+            justify-content: center;
+            gap: 1rem;
+            animation: fadeInUp 0.8s ease-out 0.8s both;
+        }
+        .search-input {
+            padding: 1rem 1.5rem;
+            border-radius: 1rem;
+            border: 2px solid var(--gray-300);
+            background-color: var(--background);
+            color: var(--text);
+            font-size: 1rem;
+            width: 300px;
+            transition: all 0.3s ease;
+        }
+        .search-input:focus {
+            outline: none;
+            border-color: var(--primary);
+            box-shadow: 0 0 0 3px rgba(49, 130, 246, 0.3);
+        }
+        .search-btn {
+            padding: 1rem 1.5rem;
+            border-radius: 1rem;
+            background: var(--primary-gradient);
+            color: white;
+            font-weight: 600;
+            border: none;
+            cursor: pointer;
+            transition: all 0.3s ease;
+        }
+        .search-btn:hover {
+            transform: translateY(-3px);
+            box-shadow: var(--shadow-lg);
+        }
+        .error-message {
+            margin-top: 1.5rem;
+            padding: 1rem;
+            border-radius: 0.5rem;
+            background-color: var(--primary-light);
+            color: var(--primary);
+            font-weight: 500;
+            animation: fadeIn 1s ease-out;
+            display: none;
+        }
+        .error-message.show {
+            display: block;
+        }
+        .suggestions {
+            margin-top: 2rem;
+            display: flex;
+            flex-wrap: wrap;
+            justify-content: center;
+            gap: 1rem;
+            animation: fadeInUp 0.8s ease-out 1s both;
+        }
+        .suggestion {
+            padding: 0.5rem 1rem;
+            border-radius: 2rem;
+            background-color: var(--gray-100);
+            color: var(--gray-700);
+            font-size: 0.9rem;
+            font-weight: 500;
+            transition: all 0.3s ease;
+            cursor: pointer;
+        }
+        .suggestion:hover {
+            background-color: var(--primary-light);
+            color: var(--primary);
+            transform: translateY(-2px);
+        }
+        @keyframes fadeInDown {
+            from {
+                opacity: 0;
+                transform: translateY(-30px);
+            }
+            to {
+                opacity: 1;
+                transform: translateY(0);
+            }
+        }
+        @keyframes fadeInUp {
+            from {
+                opacity: 0;
+                transform: translateY(30px);
+            }
+            to {
+                opacity: 1;
+                transform: translateY(0);
+            }
+        }
+        @keyframes fadeIn {
+            from {
+                opacity: 0;
+            }
+            to {
+                opacity: 1;
+            }
+        }
+        @keyframes float {
+            0%, 100% { transform: translateY(0px); }
+            50% { transform: translateY(-20px); }
+        }
+        @keyframes pulse {
+            0%, 100% { transform: scale(1); opacity: 1; }
+            50% { transform: scale(1.1); opacity: 0.8; }
+        }
+        @keyframes float-astronaut {
+            0% { transform: translate(0, 0) rotate(0deg); }
+            25% { transform: translate(100px, -50px) rotate(10deg); }
+            50% { transform: translate(200px, 0) rotate(0deg); }
+            75% { transform: translate(100px, 50px) rotate(-10deg); }
+            100% { transform: translate(0, 0) rotate(0deg); }
+        }
+        @keyframes twinkle {
+            0%, 100% { opacity: 0.3; transform: scale(1); }
+            50% { opacity: 1; transform: scale(1.2); }
+        }
+        @keyframes meteor {
+            0% { transform: translateX(0) translateY(0) rotate(-45deg); opacity: 1; }
+            100% { transform: translateX(-1000px) translateY(1000px) rotate(-45deg); opacity: 0; }
+        }
+        @keyframes rotate {
+            from { transform: rotate(0deg); }
+            to { transform: rotate(360deg); }
+        }
+        @keyframes head-bob {
+            0%, 100% { transform: translateX(-50%) translateY(0); }
+            50% { transform: translateX(-50%) translateY(-5px); }
+        }
+        @keyframes blink {
+            0%, 45%, 55%, 100% { height: 15px; }
+            50% { height: 2px; }
+        }
+        @keyframes look-around {
+            0%, 100% { transform: translate(0, 0); }
+            25% { transform: translate(3px, 0); }
+            50% { transform: translate(0, 3px); }
+            75% { transform: translate(-3px, 0); }
+        }
+        @keyframes wave-left {
+            0%, 100% { transform: rotate(0deg); }
+            50% { transform: rotate(20deg); }
+        }
+        @keyframes wave-right {
+            0%, 100% { transform: rotate(0deg); }
+            50% { transform: rotate(-20deg); }
+        }
+        @keyframes leg-swing-left {
+            0%, 100% { transform: rotate(5deg); }
+            50% { transform: rotate(-5deg); }
+        }
+        @keyframes leg-swing-right {
+            0%, 100% { transform: rotate(-5deg); }
+            50% { transform: rotate(5deg); }
+        }
+        @keyframes glow {
+            0% { box-shadow: 0 0 5px rgba(49, 130, 246, 0.5); }
+            100% { box-shadow: 0 0 20px rgba(49, 130, 246, 0.8); }
+        }
+        @keyframes glitch-anim-1 {
+            0%, 100% { clip-path: polygon(0 0, 100% 0, 100% 5%, 0 5%); }
+            20% { clip-path: polygon(0 15%, 100% 15%, 100% 20%, 0 20%); }
+            40% { clip-path: polygon(0 35%, 100% 35%, 100% 40%, 0 40%); }
+            60% { clip-path: polygon(0 55%, 100% 55%, 100% 60%, 0 60%); }
+            80% { clip-path: polygon(0 75%, 100% 75%, 100% 80%, 0 80%); }
+        }
+        @keyframes glitch-anim-2 {
+            0%, 100% { clip-path: polygon(0 10%, 100% 10%, 100% 15%, 0 15%); }
+            20% { clip-path: polygon(0 30%, 100% 30%, 100% 35%, 0 35%); }
+            40% { clip-path: polygon(0 50%, 100% 50%, 100% 55%, 0 55%); }
+            60% { clip-path: polygon(0 70%, 100% 70%, 100% 75%, 0 75%); }
+            80% { clip-path: polygon(0 90%, 100% 90%, 100% 95%, 0 95%); }
+        }
+        @media (max-width: 768px) {
+            .container {
+                padding: 1.5rem;
+            }
+            h1 {
+                font-size: 2.5rem;
+            }
+            p {
+                font-size: 1rem;
+            }
+            .error-code {
+                font-size: 10rem;
+            }
+            .theme-toggle, .lang-toggle {
+                width: 40px;
+                height: 40px;
+                font-size: 1.2rem;
+            }
+            .theme-toggle {
+                top: 1rem;
+                right: 1rem;
+            }
+            .lang-toggle {
+                top: 1rem;
+                left: 1rem;
+            }
+            .btn-container {
+                flex-direction: column;
+                gap: 0.75rem;
+            }
+            .error-illustration {
+                width: 200px;
+                height: 200px;
+            }
+            .robot {
+                transform: scale(0.7) translate(-70%, -70%);
+            }
+            .search-form {
+                flex-direction: column;
+                align-items: center;
+            }
+            .search-input {
+                width: 100%;
+            }
+        }
+    </style>
+</head>
+<body>
+    <div class="scene" id="scene">
+        <!-- Stars will be added dynamically -->
+        <!-- Meteors will be added dynamically -->
+        <div class="astronaut" style="top: 20%; left: 10%;"></div>
+        <div class="astronaut" style="top: 60%; left: 80%;"></div>
+        <div class="planet" style="top: 70%; left: 20%;"></div>
+    </div>
+    
+    <div class="container">
+        <div class="logo">
+            <img src="assets/hanni.jpg" alt="Hannibot Logo" class="logo-icon">
+            Hannibot
+        </div>
+        
+        <div class="error-illustration">
+            <div class="robot">
+                <div class="robot-body">
+                    <div class="robot-head">
+                        <div class="robot-antenna"></div>
+                        <div class="robot-eyes">
+                            <div class="robot-eye"></div>
+                            <div class="robot-eye"></div>
+                        </div>
+                    </div>
+                    <div class="robot-body-main">
+                        <div class="robot-panel">
+                            <div class="robot-button"></div>
+                            <div class="robot-button"></div>
+                            <div class="robot-button"></div>
+                            <div class="robot-button"></div>
+                            <div class="robot-button"></div>
+                            <div class="robot-button"></div>
+                        </div>
+                    </div>
+                    <div class="robot-arm robot-arm-left"></div>
+                    <div class="robot-arm robot-arm-right"></div>
+                    <div class="robot-leg robot-leg-left"></div>
+                    <div class="robot-leg robot-leg-right"></div>
+                </div>
+            </div>
+        </div>
+        
+        <h1 class="glitch-effect" data-text="404" data-ko="앗! 문제가 발생했어요." data-en="Oops! Page not found.">Oops! Page not found.</h1>
+        <p data-ko="요청하신 페이지를 찾을 수 없어요. 주소를 다시 확인하시거나 아래 버튼을 통해 홈으로 돌아가세요." data-en="The page you're looking for doesn't exist or has been moved. Please check the URL or use the options below.">The page you're looking for doesn't exist or has been moved. Please check the URL or use the options below.</p>
+        
+        <div class="search-form">
+            <input type="text" class="search-input" placeholder="Search for pages..." id="searchInput">
+            <button class="search-btn" id="searchBtn">Search</button>
+        </div>
+        
+        <div class="error-message" id="errorMessage">No results found. Please try a different search term.</div>
+        
+        <div class="suggestions">
+            <div class="suggestion" data-url="home.html">Home</div>
+            <div class="suggestion" data-url="patch.html">Patch Notes</div>
+            <div class="suggestion" data-url="service/privacy.html">Privacy Policy</div>
+            <div class="suggestion" data-url="service/tos.html">Terms of Service</div>
+        </div>
+        
+        <div class="btn-container">
+            <a href="home.html" class="btn btn-primary">
+                <i class="fas fa-home"></i>
+                <span data-ko="홈으로 돌아가기" data-en="Return to Home">Return to Home</span>
+            </a>
+            <a href="https://discord.gg/EgKFTcNvkd" class="btn btn-outline">
+                <i class="fab fa-discord"></i>
+                <span data-ko="지원 서버" data-en="Support Server">Support Server</span>
+            </a>
+        </div>
+    </div>
+    
+    <div class="error-code" aria-hidden="true">404</div>
+    
+    <button class="theme-toggle" id="themeToggle" aria-label="Toggle theme">
+        <i class="fas fa-moon"></i>
+    </button>
+    
+    <button class="lang-toggle" id="langToggle" aria-label="Toggle language">
+        <i class="fas fa-language"></i>
+    </button>
+
+    <script>
+        document.addEventListener('DOMContentLoaded', () => {
+            const themeToggle = document.getElementById('themeToggle');
+            const langToggle = document.getElementById('langToggle');
+            const translatableElements = document.querySelectorAll('[data-ko][data-en]');
+            const scene = document.getElementById('scene');
+            const searchBtn = document.getElementById('searchBtn');
+            const searchInput = document.getElementById('searchInput');
+            const errorMessage = document.getElementById('errorMessage');
+            const suggestions = document.querySelectorAll('.suggestion');
+            
+            // Create stars
+            for (let i = 0; i < 100; i++) {
+                createStar();
+            }
+            
+            // Create meteors
+            setInterval(createMeteor, 5000);
+            
+            function createStar() {
+                const star = document.createElement('div');
+                star.classList.add('star');
+                
+                // Random size between 1px and 4px
+                const size = Math.random() * 3 + 1;
+                star.style.width = `${size}px`;
+                star.style.height = `${size}px`;
+                
+                // Random position
+                star.style.left = `${Math.random() * 100}%`;
+                star.style.top = `${Math.random() * 100}%`;
+                
+                // Random animation delay
+                star.style.animationDelay = `${Math.random() * 3}s`;
+                
+                scene.appendChild(star);
+            }
+            
+            function createMeteor() {
+                const meteor = document.createElement('div');
+                meteor.classList.add('meteor');
+                
+                // Random position at the top
+                meteor.style.left = `${Math.random() * 100 + 10}%`;
+                meteor.style.top = `${Math.random() * 30}%`;
+                
+                scene.appendChild(meteor);
+                
+                // Remove meteor after animation completes
+                setTimeout(() => {
+                    meteor.remove();
+                }, 6000);
+            }
+            
+            // Theme functionality
+            const savedTheme = localStorage.getItem('theme');
+            if (savedTheme === 'dark') {
+                document.body.classList.add('dark-theme');
+                themeToggle.innerHTML = '<i class="fas fa-sun"></i>';
+            }
+
+            themeToggle.addEventListener('click', () => {
+                document.body.classList.toggle('dark-theme');
+                const isDarkTheme = document.body.classList.contains('dark-theme');
+                themeToggle.innerHTML = isDarkTheme ? '<i class="fas fa-sun"></i>' : '<i class="fas fa-moon"></i>';
+                localStorage.setItem('theme', isDarkTheme ? 'dark' : 'light');
+            });
+
+            // Language functionality
+            const savedLang = localStorage.getItem('language') || 'en';
+            setLanguage(savedLang);
+
+            langToggle.addEventListener('click', () => {
+                const currentLang = localStorage.getItem('language') || 'en';
+                const newLang = currentLang === 'en' ? 'ko' : 'en';
+                setLanguage(newLang);
+                localStorage.setItem('language', newLang);
+            });
+
+            function setLanguage(lang) {
+                document.documentElement.lang = lang;
+                translatableElements.forEach(el => {
+                    el.textContent = el.getAttribute(`data-${lang}`);
+                });
+                updateMetaTitle(lang);
+                updateAriaLabels(lang);
+                updatePlaceholder(lang);
+            }
+
+            function updateMetaTitle(lang) {
+                const title = lang === 'ko' ? '오류 발생 - Hannibot' : 'Error Occurred - Hannibot';
+                document.title = title;
+            }
+
+            function updateAriaLabels(lang) {
+                themeToggle.setAttribute('aria-label', lang === 'ko' ? '테마 변경' : 'Toggle theme');
+                langToggle.setAttribute('aria-label', lang === 'ko' ? '언어 변경' : 'Toggle language');
+            }
+            
+            function updatePlaceholder(lang) {
+                searchInput.placeholder = lang === 'ko' ? '페이지 검색...' : 'Search for pages...';
+                searchBtn.textContent = lang === 'ko' ? '검색' : 'Search';
+                errorMessage.textContent = lang === 'ko' ? '결과가 없습니다. 다른 검색어를 시도해보세요.' : 'No results found. Please try a different search term.';
+                
+                suggestions.forEach(suggestion => {
+                    const url = suggestion.getAttribute('data-url');
+                    if (url === 'home.html') {
+                        suggestion.textContent = lang === 'ko' ? '홈' : 'Home';
+                    } else if (url === 'patch.html') {
+                        suggestion.textContent = lang === 'ko' ? '패치 노트' : 'Patch Notes';
+                    } else if (url === 'service/privacy.html') {
+                        suggestion.textContent = lang === 'ko' ? '개인정보 처리방침' : 'Privacy Policy';
+                    } else if (url === 'service/tos.html') {
+                        suggestion.textContent = lang === 'ko' ? '이용약관' : 'Terms of Service';
+                    }
+                });
+            }
+            
+            // Check if this page was loaded due to a 404 error
+            const urlParams = new URLSearchParams(window.location.search);
+            const errorPath = urlParams.get('path');
+            
+            if (errorPath) {
+                const errorMessageEl = document.querySelector('p');
+                const errorMessageKo = `요청하신 페이지 "${errorPath}"를 찾을 수 없어요. 주소를 다시 확인하시거나 아래 버튼을 통해 홈으로 돌아가세요.`;
+                const errorMessageEn = `We couldn't find the page "${errorPath}" you were looking for. Please check the URL or use the options below.`;
+                
+                errorMessageEl.setAttribute('data-ko', errorMessageKo);
+                errorMessageEl.setAttribute('data-en', errorMessageEn);
+                
+                if (document.documentElement.lang === 'ko') {
+                    errorMessageEl.textContent = errorMessageKo;
+                } else {
+                    errorMessageEl.textContent = errorMessageEn;
+                }
+            }
+            
+            // Search functionality
+            searchBtn.addEventListener('click', performSearch);
+            searchInput.addEventListener('keypress', (e) => {
+                if (e.key === 'Enter') {
+                    performSearch();
+                }
+            });
+            
+            function performSearch() {
+                const searchTerm = searchInput.value.toLowerCase().trim();
+                if (searchTerm === '') return;
+                
+                const pages = [
+                    { url: 'home.html', title: 'Home', keywords: ['home', 'main', 'index', 'homepage', '홈', '메인'] },
+                    { url: 'patch.html', title: 'Patch Notes', keywords: ['patch', 'notes', 'updates', 'changes', '패치', '노트', '업데이트'] },
+                    { url: 'service/privacy.html', title: 'Privacy Policy', keywords: ['privacy', 'policy', 'data', '개인정보', '처리방침'] },
+                    { url: 'service/tos.html', title: 'Terms of Service', keywords: ['terms', 'service', 'tos', 'legal', '이용약관', '약관'] }
+                ];
+                
+                const results = pages.filter(page => {
+                    return page.title.toLowerCase().includes(searchTerm) || 
+                           page.keywords.some(keyword => keyword.includes(searchTerm));
+                });
+                
+                if (results.length > 0) {
+                    window.location.href = results[0].url;
+                } else {
+                    errorMessage.classList.add('show');
+                    setTimeout(() => {
+                        errorMessage.classList.remove('show');
+                    }, 3000);
+                }
+            }
+            
+            // Suggestion clicks
+            suggestions.forEach(suggestion => {
+                suggestion.addEventListener('click', () => {
+                    const url = suggestion.getAttribute('data-url');
+                    window.location.href = url;
+                });
+            });
+            
+            // Interactive robot eyes
+            document.addEventListener('mousemove', (e) => {
+                const eyes = document.querySelectorAll('.robot-eye::after');
+                const x = e.clientX / window.innerWidth;
+                const y = e.clientY / window.innerHeight;
+                
+                eyes.forEach(eye => {
+                    const element = eye;
+                    element.style.transform = `translate(${(x - 0.5) * 6}px, ${(y - 0.5) * 6}px)`;
+                });
+            });
+        });
+    </script>
+</body>
+</html>
+
