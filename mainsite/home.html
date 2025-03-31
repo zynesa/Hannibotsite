@@ -3,15 +3,18 @@
 <head>
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>!!긴급 공지!!</title>
+  <title>중요 공지!</title>
   <style>
+    @import url('https://fonts.googleapis.com/css2?family=Black+Han+Sans&family=Noto+Sans+KR:wght@400;700&display=swap');
+    
     body {
-      font-family: 'Arial', sans-serif;
+      font-family: 'Noto Sans KR', sans-serif;
       margin: 0;
       padding: 0;
-      background-color: #000;
+      background-color: #1a1a1a;
       color: #fff;
       overflow-x: hidden;
+      perspective: 1000px;
     }
     
     .container {
@@ -19,75 +22,211 @@
       margin: 0 auto;
       padding: 20px;
       text-align: center;
+      position: relative;
+      z-index: 10;
     }
     
-    .warning {
-      color: #ff0000;
-      font-size: 36px;
-      font-weight: bold;
-      animation: blink 1s infinite;
-      margin: 30px 0;
+    .header {
+      font-family: 'Black Han Sans', sans-serif;
+      color: #ff5252;
+      font-size: 48px;
+      margin: 20px 0;
+      text-shadow: 0 0 10px rgba(255, 0, 0, 0.7);
+      animation: pulse 1.5s infinite;
     }
     
-    @keyframes blink {
-      0% { opacity: 1; }
-      50% { opacity: 0; }
-      100% { opacity: 1; }
+    @keyframes pulse {
+      0% { transform: scale(1); text-shadow: 0 0 10px rgba(255, 0, 0, 0.7); }
+      50% { transform: scale(1.05); text-shadow: 0 0 20px rgba(255, 0, 0, 1); }
+      100% { transform: scale(1); text-shadow: 0 0 10px rgba(255, 0, 0, 0.7); }
     }
     
-    .alert-box {
-      background-color: #ff0000;
-      color: white;
+    .big-announcement {
+      background: linear-gradient(45deg, #ff9966, #ff5e62);
       padding: 20px;
       border-radius: 10px;
-      margin-bottom: 30px;
+      box-shadow: 0 0 30px rgba(255, 94, 98, 0.5);
+      margin: 30px 0;
+      transform-style: preserve-3d;
+      animation: float 3s ease-in-out infinite;
     }
     
-    .countdown {
-      font-size: 48px;
-      font-weight: bold;
-      margin: 30px 0;
+    @keyframes float {
+      0% { transform: translateY(0px) rotate3d(0, 1, 0, 0deg); }
+      50% { transform: translateY(-15px) rotate3d(0, 1, 0, 3deg); }
+      100% { transform: translateY(0px) rotate3d(0, 1, 0, 0deg); }
+    }
+    
+    .big-announcement h2 {
+      font-size: 28px;
+      margin-top: 0;
+    }
+    
+    .emoji-rain {
+      position: absolute;
+      top: 0;
+      left: 0;
+      width: 100%;
+      height: 100%;
+      pointer-events: none;
+      z-index: 1;
+    }
+    
+    .emoji {
+      position: absolute;
+      font-size: 24px;
+      animation: fall linear infinite;
+    }
+    
+    @keyframes fall {
+      0% { transform: translateY(-100px) rotate(0deg); opacity: 1; }
+      100% { transform: translateY(100vh) rotate(360deg); opacity: 0; }
     }
     
     .btn {
       display: inline-block;
       padding: 15px 30px;
-      background-color: #ff0000;
+      background: linear-gradient(to right, #4facfe, #00f2fe);
       color: white;
       font-size: 18px;
       border: none;
-      border-radius: 5px;
+      border-radius: 50px;
       cursor: pointer;
-      margin: 10px;
+      margin: 15px;
       text-decoration: none;
       font-weight: bold;
+      box-shadow: 0 5px 15px rgba(0, 242, 254, 0.4);
+      transition: all 0.3s ease;
+      position: relative;
+      overflow: hidden;
     }
     
     .btn:hover {
-      background-color: #cc0000;
+      transform: translateY(-5px);
+      box-shadow: 0 10px 20px rgba(0, 242, 254, 0.6);
     }
     
-    .special-offer {
-      background-color: #ffff00;
+    .btn:before {
+      content: '';
+      position: absolute;
+      top: 0;
+      left: -100%;
+      width: 100%;
+      height: 100%;
+      background: linear-gradient(90deg, transparent, rgba(255, 255, 255, 0.2), transparent);
+      transition: 0.5s;
+    }
+    
+    .btn:hover:before {
+      left: 100%;
+    }
+    
+    .prize-section {
+      background-color: #ffcd00;
       color: #000;
       padding: 20px;
       border-radius: 10px;
       margin: 30px 0;
+      position: relative;
+      overflow: hidden;
+    }
+    
+    .prize-section:before {
+      content: '';
+      position: absolute;
+      top: -10px;
+      left: -10px;
+      right: -10px;
+      bottom: -10px;
+      background: repeating-linear-gradient(45deg, #ffcd00, #ffcd00 10px, #ffd700 10px, #ffd700 20px);
+      z-index: -1;
+      animation: shine 20s linear infinite;
+    }
+    
+    @keyframes shine {
+      0% { transform: translateX(-50%) translateY(-50%) rotate(0deg); }
+      100% { transform: translateX(-50%) translateY(-50%) rotate(360deg); }
+    }
+    
+    .prize-amount {
+      font-size: 72px;
       font-weight: bold;
+      margin: 10px 0;
+      color: #d32f2f;
+      text-shadow: 2px 2px 0 #ffeb3b, 4px 4px 0 rgba(0,0,0,0.2);
+    }
+    
+    .notification {
+      background-color: #333;
+      color: #fff;
+      padding: 15px 20px;
+      border-radius: 5px;
+      box-shadow: 0 5px 10px rgba(0,0,0,0.3);
+      position: fixed;
+      bottom: 20px;
+      right: 20px;
+      max-width: 250px;
+      transform: translateX(120%);
+      animation: slideInOut 5s forwards;
+      z-index: 100;
+    }
+    
+    @keyframes slideInOut {
+      0% { transform: translateX(120%); }
+      10% { transform: translateX(0); }
+      90% { transform: translateX(0); }
+      100% { transform: translateX(120%); }
     }
     
     .popup {
       position: fixed;
       top: 50%;
       left: 50%;
-      transform: translate(-50%, -50%);
+      transform: translate(-50%, -50%) scale(0.7);
       background-color: white;
-      color: black;
-      padding: 20px;
-      border-radius: 10px;
+      color: #333;
+      padding: 30px;
+      border-radius: 20px;
       z-index: 100;
       display: none;
-      box-shadow: 0 0 20px rgba(255, 0, 0, 0.5);
+      box-shadow: 0 10px 50px rgba(0, 0, 0, 0.5);
+      max-width: 90%;
+      width: 500px;
+      opacity: 0;
+      transition: all 0.5s cubic-bezier(0.68, -0.55, 0.27, 1.55);
+    }
+    
+    .popup.active {
+      opacity: 1;
+      transform: translate(-50%, -50%) scale(1);
+    }
+    
+    .popup-header {
+      text-align: center;
+      margin-bottom: 20px;
+    }
+    
+    .popup-title {
+      font-size: 28px;
+      color: #ff5e62;
+      margin-bottom: 10px;
+    }
+    
+    .confetti-container {
+      position: fixed;
+      width: 100%;
+      height: 100%;
+      left: 0;
+      top: 0;
+      pointer-events: none;
+      z-index: 50;
+    }
+    
+    .confetti {
+      position: absolute;
+      width: 10px;
+      height: 10px;
+      opacity: 0;
     }
     
     .overlay {
@@ -101,94 +240,165 @@
       display: none;
     }
     
-    .hack-text {
-      font-family: monospace;
-      color: #0f0;
-      font-size: 14px;
-      text-align: left;
-      margin: 20px 0;
-      overflow: hidden;
-      white-space: nowrap;
-      border-right: 2px solid #0f0;
-      width: 0;
-      animation: typing 3s steps(60, end) forwards;
+    .crazy-cursor {
+      position: fixed;
+      width: 30px;
+      height: 30px;
+      background-color: transparent;
+      border-radius: 50%;
+      pointer-events: none;
+      z-index: 9999;
+      display: none;
     }
     
-    @keyframes typing {
-      from { width: 0 }
-      to { width: 100% }
+    .cursor-dot {
+      position: absolute;
+      width: 100%;
+      height: 100%;
+      border-radius: 50%;
+      animation: cursorPulse 1s infinite;
     }
     
-    .april-fools {
+    @keyframes cursorPulse {
+      0% { transform: scale(1); opacity: 1; box-shadow: 0 0 0 0 rgba(255, 82, 82, 0.7); }
+      70% { transform: scale(1.5); opacity: 0.7; box-shadow: 0 0 0 10px rgba(255, 82, 82, 0); }
+      100% { transform: scale(1); opacity: 1; box-shadow: 0 0 0 0 rgba(255, 82, 82, 0); }
+    }
+    
+    #glitch-effect {
+      position: fixed;
+      top: 0;
+      left: 0;
+      width: 100%;
+      height: 100%;
+      pointer-events: none;
+      z-index: 80;
+      opacity: 0;
+      background: url('/api/placeholder/400/300') center no-repeat;
+      background-size: cover;
+      animation: glitchAnimation 0.3s steps(1) infinite;
+      display: none;
+    }
+    
+    @keyframes glitchAnimation {
+      0% { transform: translate(0); filter: hue-rotate(0deg); }
+      25% { transform: translate(-5px, 5px); filter: hue-rotate(90deg); }
+      50% { transform: translate(5px, -5px); filter: hue-rotate(180deg); }
+      75% { transform: translate(-5px, -5px); filter: hue-rotate(270deg); }
+      100% { transform: translate(0); filter: hue-rotate(360deg); }
+    }
+    
+    .april-fools-btn {
       position: fixed;
       bottom: 10px;
       right: 10px;
-      background-color: #fff;
-      color: #000;
+      background-color: rgba(255, 255, 255, 0.2);
+      color: rgba(255, 255, 255, 0.8);
       padding: 5px 10px;
       border-radius: 5px;
       font-size: 12px;
       cursor: pointer;
-      opacity: 0.5;
+      z-index: 999;
     }
     
-    .april-fools:hover {
-      opacity: 1;
+    .april-fools-btn:hover {
+      background-color: rgba(255, 255, 255, 0.3);
     }
     
-    .dance {
-      animation: dance 0.5s infinite;
+    #winner-image {
+      width: 80%;
+      max-width: 300px;
+      height: auto;
+      margin: 20px auto;
+      border-radius: 10px;
+      box-shadow: 0 5px 15px rgba(0,0,0,0.2);
     }
     
-    @keyframes dance {
-      0% { transform: translateY(0); }
-      50% { transform: translateY(-10px); }
-      100% { transform: translateY(0); }
+    .hidden-message {
+      color: transparent;
+      font-size: 3px;
+      position: absolute;
+      bottom: 0;
+      right: 0;
     }
   </style>
 </head>
 <body>
   <div class="container">
-    <h1 class="warning">⚠️ 긴급 보안 경고 ⚠️</h1>
+    <h1 class="header">🎉 축하합니다! 당신이 선택되었습니다! 🎉</h1>
     
-    <div class="alert-box">
-      <h2>귀하의 브라우저가 해킹되었습니다!</h2>
-      <p>귀하의 모든 개인정보가 유출 위험에 노출되어 있습니다.</p>
-      <p>신속히 조치하지 않으면 모든 금융 정보가 해외로 전송됩니다!</p>
+    <div class="big-announcement">
+      <h2>귀하는 오늘의 행운의 방문자입니다!</h2>
+      <p>당신의 IP 주소 (123.456.789.xxx)가 랜덤 이벤트 당첨자로 선정되었습니다.</p>
+      <p>오늘 단 한 명에게만 제공되는 특별한 기회를 놓치지 마세요!</p>
     </div>
     
-    <div class="hack-text">
-      > 접속 중... 개인정보 스캔 완료... 취약점 발견... 데이터 추출 진행 중... 완료까지 남은 시간:
+    <div class="prize-section">
+      <h3>당신의 상금</h3>
+      <div class="prize-amount">₩10,000,000</div>
+      <p>잠시 후 카운트다운이 끝나면 상금 지급이 불가능합니다!</p>
+      <div id="countdown">00:30</div>
     </div>
     
-    <div class="countdown" id="countdown">02:00</div>
-    
-    <button class="btn dance" id="fix-button">지금 바로 문제 해결하기!</button>
-    <button class="btn" id="more-info">자세한 정보</button>
-    
-    <div class="special-offer">
-      <h3>🎉 특별 혜택! 🎉</h3>
-      <p>지금 가입하시면 6개월간 해킹 방지 서비스를 무료로 이용하실 수 있습니다!</p>
-      <p>단 1분 내로 결정하세요! 이 기회를 놓치지 마세요!</p>
-    </div>
+    <button class="btn" id="claim-prize">지금 상금 받기!</button>
+    <button class="btn" id="share-btn">친구에게 공유하기</button>
   </div>
+  
+  <div class="emoji-rain" id="emoji-rain"></div>
+  
+  <div class="crazy-cursor" id="crazy-cursor">
+    <div class="cursor-dot"></div>
+  </div>
+  
+  <div id="glitch-effect"></div>
   
   <div class="overlay" id="overlay"></div>
   
   <div class="popup" id="popup">
-    <h2>만우절 즐거운 하루 되세요! 🎉</h2>
-    <p>이것은 만우절 장난입니다. 실제 해킹이 아니니 안심하세요!</p>
+    <div class="popup-header">
+      <h2 class="popup-title">만우절 즐거운 하루 되세요! 🎁</h2>
+      <p>이것은 만우절 장난입니다!</p>
+    </div>
+    
+    <img id="winner-image" src="/api/placeholder/400/300" alt="놀라는 표정">
+    
+    <p>실제 당첨된 것은 아니지만, 여러분에게 웃음을 선사해 드렸다면 저희의 목표는 달성되었습니다! 😄</p>
+    <p>이 재미있는 만우절 장난을 친구들과 함께 공유해 보세요!</p>
+    
     <button class="btn" id="close-popup">닫기</button>
   </div>
   
-  <div class="april-fools" id="reveal-button">만우절</div>
+  <div class="confetti-container" id="confetti-container"></div>
+  
+  <div class="april-fools-btn" id="reveal-button">만우절</div>
+  
+  <div class="hidden-message">만우절 장난입니다</div>
   
   <script>
-    // 카운트다운 기능
-    let seconds = 120;
+    // 이모지 비 효과
+    const emojis = ['💰', '💸', '🤑', '💵', '💎', '🏆', '🎁', '🎊', '🎉'];
+    const emojiRain = document.getElementById('emoji-rain');
+    
+    function createEmoji() {
+      const emoji = document.createElement('div');
+      emoji.classList.add('emoji');
+      emoji.textContent = emojis[Math.floor(Math.random() * emojis.length)];
+      emoji.style.left = Math.random() * 100 + 'vw';
+      emoji.style.animationDuration = Math.random() * 3 + 2 + 's';
+      emojiRain.appendChild(emoji);
+      
+      setTimeout(() => {
+        emoji.remove();
+      }, 5000);
+    }
+    
+    setInterval(createEmoji, 300);
+    
+    // 카운트다운
+    let seconds = 30;
     const countdownEl = document.getElementById('countdown');
     
-    const updateCountdown = () => {
+    function updateCountdown() {
       const mins = Math.floor(seconds / 60);
       const secs = seconds % 60;
       countdownEl.textContent = `${mins.toString().padStart(2, '0')}:${secs.toString().padStart(2, '0')}`;
@@ -199,31 +409,155 @@
       } else {
         revealJoke();
       }
-    };
+    }
     
     updateCountdown();
     
-    // 만우절 공개 기능
-    const revealJoke = () => {
-      document.getElementById('overlay').style.display = 'block';
-      document.getElementById('popup').style.display = 'block';
-    };
+    // 알림 효과
+    function createNotification() {
+      const messages = [
+        "방금 홍길동님이 ₩10,000,000를 수령했습니다!",
+        "김철수님이 방금 당첨금을 받아갔습니다!",
+        "이영희님이 친구 5명과 상금을 나눴습니다!",
+        "현재 접속자 수: 2,547명",
+        "당첨 확률이 올라갔습니다! 서두르세요!"
+      ];
+      
+      const notification = document.createElement('div');
+      notification.classList.add('notification');
+      notification.textContent = messages[Math.floor(Math.random() * messages.length)];
+      document.body.appendChild(notification);
+      
+      setTimeout(() => {
+        notification.remove();
+      }, 5000);
+    }
     
-    // 이벤트 리스너 등록
-    document.getElementById('fix-button').addEventListener('click', revealJoke);
-    document.getElementById('more-info').addEventListener('click', revealJoke);
-    document.getElementById('reveal-button').addEventListener('click', revealJoke);
-    document.getElementById('close-popup').addEventListener('click', () => {
-      document.getElementById('overlay').style.display = 'none';
-      document.getElementById('popup').style.display = 'none';
+    setInterval(createNotification, 8000);
+    
+    // 커서 효과
+    const crazyCursor = document.getElementById('crazy-cursor');
+    
+    function activateCrazyCursor() {
+      crazyCursor.style.display = 'block';
+      
+      document.addEventListener('mousemove', (e) => {
+        const x = e.clientX;
+        const y = e.clientY;
+        
+        // 커서가 실제 마우스를 30px 정도 랜덤하게 따라감
+        const randomX = x + (Math.random() * 60 - 30);
+        const randomY = y + (Math.random() * 60 - 30);
+        
+        crazyCursor.style.left = randomX + 'px';
+        crazyCursor.style.top = randomY + 'px';
+        
+        // 랜덤 색상 변경
+        const randomColor = `hsl(${Math.random() * 360}, 100%, 50%)`;
+        crazyCursor.querySelector('.cursor-dot').style.backgroundColor = randomColor;
+      });
+    }
+    
+    // 컨페티 효과
+    function createConfetti() {
+      const confettiContainer = document.getElementById('confetti-container');
+      const colors = ['#ff5252', '#ffeb3b', '#2196f3', '#4caf50', '#e040fb'];
+      
+      for (let i = 0; i < 100; i++) {
+        const confetti = document.createElement('div');
+        confetti.classList.add('confetti');
+        
+        // 랜덤 형태와 색상
+        const size = Math.random() * 10 + 5;
+        const color = colors[Math.floor(Math.random() * colors.length)];
+        const shape = Math.random() > 0.5 ? '50%' : '0';
+        
+        confetti.style.width = `${size}px`;
+        confetti.style.height = `${size}px`;
+        confetti.style.backgroundColor = color;
+        confetti.style.borderRadius = shape;
+        
+        // 랜덤 위치
+        confetti.style.left = `${Math.random() * 100}%`;
+        confetti.style.top = `${Math.random() * 100}%`;
+        
+        // 애니메이션
+        const animationDuration = Math.random() * 3 + 2;
+        confetti.style.animation = `fall ${animationDuration}s ease-in forwards`;
+        
+        confettiContainer.appendChild(confetti);
+        
+        setTimeout(() => {
+          confetti.remove();
+        }, animationDuration * 1000);
+      }
+    }
+    
+    // 글리치 효과
+    function activateGlitchEffect() {
+      const glitchEffect = document.getElementById('glitch-effect');
+      glitchEffect.style.display = 'block';
+      
+      setTimeout(() => {
+        glitchEffect.style.opacity = '0.1';
+        
+        setTimeout(() => {
+          glitchEffect.style.display = 'none';
+        }, 500);
+      }, 1000);
+    }
+    
+    // 만우절 공개
+    function revealJoke() {
+      document.getElementById('overlay').style.display = 'block';
+      const popup = document.getElementById('popup');
+      popup.style.display = 'block';
+      
+      setTimeout(() => {
+        popup.classList.add('active');
+        createConfetti();
+      }, 100);
+      
+      // 브라우저 화면 살짝 흔들기
+      document.body.style.animation = 'shake 0.5s';
+      setTimeout(() => {
+        document.body.style.animation = '';
+      }, 500);
+    }
+    
+    // 이벤트 리스너
+    document.getElementById('claim-prize').addEventListener('click', () => {
+      activateGlitchEffect();
+      setTimeout(revealJoke, 500);
     });
     
-    // 랜덤 팝업창 효과 (10-15초 후)
+    document.getElementById('share-btn').addEventListener('click', () => {
+      activateCrazyCursor();
+      setTimeout(revealJoke, 2000);
+    });
+    
+    document.getElementById('reveal-button').addEventListener('click', revealJoke);
+    
+    document.getElementById('close-popup').addEventListener('click', () => {
+      document.getElementById('overlay').style.display = 'none';
+      document.getElementById('popup').classList.remove('active');
+      
+      setTimeout(() => {
+        document.getElementById('popup').style.display = 'none';
+      }, 500);
+    });
+    
+    // 랜덤 효과 (페이지 로드 후 5-10초 후에)
     setTimeout(() => {
-      if (Math.random() > 0.5) {
-        revealJoke();
+      const randomEffect = Math.random();
+      if (randomEffect < 0.33) {
+        activateCrazyCursor();
+      } else if (randomEffect < 0.66) {
+        activateGlitchEffect();
+      } else {
+        createConfetti();
       }
-    }, 10000 + Math.random() * 5000);
+    }, 5000 + Math.random() * 5000);
   </script>
 </body>
 </html>
